@@ -1,0 +1,46 @@
+{{ block title }}Introduction{{ endblock }}
+
+{{ block content }}
+
+    {{ include Constants.instructions_template }}
+
+           <center>     In the next page, you are required to answer some questions to start the experiment. </center>
+
+<br> <br>
+
+<center>
+    {{ next_button }}
+</center>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock }}

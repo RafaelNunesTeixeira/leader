@@ -1,0 +1,58 @@
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        In this study, you will be in a randomly formed group of {{ Constants.players_per_group }} participants.
+        You are going to play with the same group for {{Constants.rounds}} rounds.
+        The group is composed of <strong>{{player.galera}}</strong>. You assume the role of <strong> {{player.role}} </strong> in your group.
+
+    </p>
+        <p></p>
+    <p>
+        Each participant in the group starts each round with 20 points.
+        The group has the opportunity to undertake a joint project.
+        The joint project consists of two stages:
+    </p>
+        <ul>
+        <li>
+        FIRST STAGE:
+            Each participant in the group decides how many points to contribute to the project.
+            A contribution could be any whole number from 0 to 20.
+            Each 1 point contributed to the project is multiplied by {{ Constants.multiplier }}.
+            The result of the project is the sum of contribution given by all group members multiplied by the {{ Constants.multiplier }}.
+            Then the result of the project is <strong>evenly split among all</strong> {{ Constants.players_per_group }} participants:
+            {{player.galera}}. The points not contributed to the project are also kept by the participants.
+
+        </li>
+            <br>
+            <p>Your payoff from the first stage is therefore: </p>
+            <center>(Payoff STAGE 1) = (20 – your contribution to the project) +  <sup>1.5 &times(total contribution to the project)</sup>&frasl;<sub>3</sub>
+</center>
+            <br>
+
+        <li>
+        SECOND STAGE:
+            The participants see each other's contributions to the project.
+            At this stage, you can choose to distribute punishment points to each of the other particants, or not
+            The other participants can also choose distribute punishment points to you, if they wish to.
+            You can distribute from 0 to 10 punishment points to all other participants.
+            Each punishment point that you distribute to another participant reduces your payoff by 1 point
+            and reduces the other participant's payoff by {{ Constants.punmulti }} points.
+            Similarly, your payoff is reduced by 2 points for every point the other group members distribute to you.
+        </li>
+
+            <br><p>Your total payoff in a round is then:</p>
+<center>Total Payoff = (Payoff STAGE 1) – (punishment points you give) – 2  &times (punishment points you get) </center>
+
+<br><p>The payoff of the other participants are calculated in the same way.</p>
+
+        </ul>
+    </p>
+    </p>
+    </div>
+</div>
+

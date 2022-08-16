@@ -1,0 +1,233 @@
+{{ block style }}
+<style type="text/css">
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext
+{
+  /* Checkbox text */
+  font-size: 110%;
+  display: inline;
+}
+
+</style>
+{{ endblock }}
+
+{{ block title }}
+<center> <img src="{{ static 'global/uva-logo.png' }}"/> </center>
+{{ endblock }}
+{{ block content }}
+
+
+<body onmousemove="resettimer()">
+<div id="inst" style="display: block">
+
+
+<p> You will be allocated to one group to start the experiment. This process can take up to 5 minutes. Notice that this waiting time is considered in the experiment's duration (25 minutes).</p>
+
+<p> The task requires 3 participants in each group. To be matched, you need to check the box below to search for a group and stay active in this page. </p>
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <center>
+<p id="msg-my-status"> Check the box below to search for a group:</p>
+<p id="msg-my-bid"> </p>
+
+
+<input type="checkbox" id="btn-bid" onclick="sendBid()"/></center>
+
+</div>
+</div>
+<div id="isnt3">
+    <p><center> When 3 participants are ready, the group will be created.</center></div>
+<br>
+    <p> You are <strong>required to stay active</strong> in the page to be eligible for the group. You can be up to 20 second away from the page, otherwise you will be considered inactive.</p>
+<p> If you are away, the checkbox above will be unchecked, ending your group search. You will need to check it again for start a new search for a group.</p>
+<p> Participants who are inactive for long periods will be dropped from the experiment and will not be paid.  </p>
+
+<div class="card bg-light m-3">
+<div class="card-body">
+<center>
+<p> Your stats is:  </p>
+    <p id="msgActive">  </p>
+    <p> Time AFK: </p>
+<div id="some_div">
+</div>
+</center>
+</div>
+</div>
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+    <div id="contact" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+
+<div id="inst2" style="display: none">
+    Click in the link below to start:
+
+    <center>
+      <h2 style="text-align: center;"><a href="https://online-experiment.herokuapp.com/room/ExperimentG3/?participant_label={{player.participant.label}}"  target="_blank">Click here to start.</a> </h2>
+    </center>
+
+</div>
+
+
+</body>
+
+
+
+{{ endblock }}
+
+
+{{ block script }}
+<script>
+
+
+
+let bidBtn = document.getElementById('btn-bid');
+let msgMyStatus = document.getElementById('msg-my-status');
+let msgMyBid = document.getElementById('msg-my-bid');
+
+var x = document.getElementById("inst");
+var y = document.getElementById("inst2");
+aloka = 0
+
+
+
+function checando(data){
+
+                if (aloka<2){
+                      y.style.display = "none";
+                      x.style.display = "block";
+            }
+
+            }
+
+function abrindo(){
+        if (aloka==2){
+            y.style.display = "block";
+            x.style.display = "none";
+            aloka = 3
+            }
+        if (aloka==3){
+            y.style.display = "block";
+            x.style.display = "none";
+            }
+        }
+
+
+function sendBid(btn){
+        if (bidBtn.checked == true){
+            msgMyStatus.innerText = 'You are waiting for a group:';
+            aloka = 2
+            liveSend(parseInt(2));}
+
+        if (bidBtn.checked == false){
+            msgMyStatus.innerText = 'Check the box below to search for a group:';
+            aloka = 1
+            liveSend(parseInt(1));}
+}
+function liveRecv(data) {
+    console.log('liveRecv', data);
+    console.log('liveRecv', aloka)
+
+    if (data.bid==-1) {
+        y.style.display = "block";
+        x.style.display = "none";}
+
+
+    if (data.top_bid === 0) {
+        msgMyBid.innerText = `Nobody is waiting for the experiment`;
+    }
+    if (data.top_bid === 1) {
+        msgMyBid.innerText = '1 participant is waiting for the experiment';
+    }
+    if (data.top_bid === 2) {
+        msgMyBid.innerText = '2 participants are waiting for the experiment';
+    }
+    if (data.top_bid === 3) {
+        msgMyBid.innerText = ` ${data.top_bid} are waiting for the experiment `;
+        if (aloka==2){
+            liveSend(parseInt(-1));
+            abrindo();
+            ;
+
+
+                }
+           }
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function (event) {
+liveSend({});
+});
+
+
+
+
+
+
+
+
+
+    var elem = document.getElementById('some_div');
+
+    var timerId = setInterval(countdown, 1000);
+    var timeLeft = 0
+    function countdown() {
+
+
+      if (timeLeft > 20) {
+       msgActive.innerHTML='Away';
+       timeLeft++
+       elem.innerHTML = timeLeft + ' seconds remaining';
+        if (bidBtn.checked == true){
+                bidBtn.checked = false;
+                liveSend(parseInt(1));
+                msgMyStatus.innerText = 'Check the box below to search for a group:';}
+
+      } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft++;
+        msgActive.innerHTML='Active';
+      }
+    }
+
+    function resettimer() {
+        timeLeft=0
+        checando()
+        }
+
+    function show2() {
+        var zz = document.getElementById("contact");
+            if (zz.style.display === "none") {
+                zz.style.display = "block";
+            } else {
+                zz.style.display = "none";
+            }
+            }
+
+</script>
+{{ endblock }}

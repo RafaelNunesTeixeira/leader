@@ -1,0 +1,62 @@
+{{ block title }} <center>   {{player.participant.rol}}'s Contribution - Period {{ subsession.round_number }} of {{ Constants.num_rounds }}
+    </center>
+    {{ endblock }}
+{{ block content }}
+<div class="game-body">
+<br>
+    <br>
+    <center>
+<form action="/action_page.php">
+    <label for="contribution">How many points do you contribute to the project (from 0 to 20)?</label>
+    <br>
+    <br>
+  <input type="text" id="contribution" name="contribution" size="2" max="20" min="0" required><br><br>
+</form>
+    </center>
+<center>
+    {{ next_button }}
+</center>
+
+
+<div>
+        <button type="button" onclick="show()">
+    Instructions
+</button>
+
+    <div id="inst" style="display: none">
+    {{ include Constants.instructions_template }}
+    </div>
+    <br>
+    <br>
+</div>
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock }}

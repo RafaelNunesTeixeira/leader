@@ -1,0 +1,17 @@
+
+        <!-- Full-Screen & Focus -->
+    <script src="{% static 'global/FriendlyChecks.js' %}"></script>
+    <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
+
+{{ block title }}Introduction{{ endblock }}
+
+{{ block content }}
+
+    {{ include Constants.instructions_template }}
+
+           <center>     Before starting the experiment. On the next page, you are required to answer some questions about the instructions. </center>
+
+<br> <br>
+        <center> {{ next_button }} </center>
+
+{{ endblock }}

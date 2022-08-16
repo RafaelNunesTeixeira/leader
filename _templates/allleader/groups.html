@@ -1,0 +1,35 @@
+
+
+        <!-- Full-Screen & Focus -->
+    <script src="{% static 'global/FriendlyChecks.js' %}"></script>
+    <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
+
+{{ block title }}{{ endblock }}
+
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #0000FF;
+  flex-direction      : column;
+  text-align          : center;
+  justify-content     : center;
+  padding: 10px;
+  font-size           : 2em;
+  font-weight:        : bold;
+}
+</style>
+
+{{ block content }}
+<div class="center">
+<center> Group is formed. We can start the the experiment.</center>
+
+<br> <br>
+
+    <center>     {{ next_button }} </center>
+
+</div>
+
+
+
+{{ endblock }}

@@ -1,0 +1,102 @@
+{{ block title }}   Results  (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}) {{ endblock }}
+
+{% block styles %}
+
+    <style>
+        td#filka {
+            width: 20px;
+            font-weight: bold;
+            font-size: 120%;
+        }</style>
+
+{% endblock %}
+{% block content %}
+
+<div class="panel-body">
+    <table class="table table-hover table-striped table-bordered">
+
+
+    </table>
+<br>
+    <table class="table table-hover table-striped table-bordered">
+        <tr style="font-size:18px;background-color:#A9A9A9; " >  <td><strong>Project's contributions</strong> </td> <td></td></tr>
+        <tr>
+            <td>You <strong>({{player.participant.rol}})</strong> contributed:</td>
+            <td style="width: 200px" align="center"><strong>{{ player.contribution }}</strong></td>
+
+        </tr>
+        {{ for p in player.get_others_in_group }}
+	    <tr>
+            <td><strong>{{p.participant.rol}}</strong> contributed:</td>
+            <td style="width: 200px" align="center">{{ p.contribution }}</td>
+
+        <tr>
+	    {{ endfor }}
+        <tr style="background-color:#C0C0C0;">
+                <td><strong>Project's Final Result:</strong></td>
+        <td style="width: 200px" align="center"><strong>{{ group.final }}</strong></td>
+        </tr>
+        <tr style="background-color:#BEBEBA;">
+
+
+        <td><strong>Project's individual earning:</strong></td>
+        <td style="width: 200px" align="center"><strong>{{ group.individual_share }}</strong></td>
+        </tr>
+        <td><strong>Endowment Kept:</strong></td>
+
+        <td style="width: 200px" align="center"><strong>{{ endkept }} </strong></td>
+
+        <tr style="background-color:#A9A9A9;">
+
+            <td><strong>Total earnings:</strong></td>
+            <td style="width: 200px" align="center"><strong>{{ s1 }}</strong></td>
+        </tr>
+     </table>
+       <center>
+    {{ next_button }}
+</center>
+
+
+<div>
+        <button type="button" onclick="show()">
+    Instructions
+</button>
+
+    <div id="inst" style="display: none">
+    {{ include Constants.instructions_template }}
+    </div>
+    <br>
+    <br>
+</div>
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+{{ endblock }}

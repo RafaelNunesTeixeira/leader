@@ -1,0 +1,167 @@
+
+        <!-- Full-Screen & Focus -->
+    <script src="{% static 'global/FriendlyChecks.js' %}"></script>
+    <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
+
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+<center>
+    {{player.role}}'s Stage 2 - Period {{ subsession.round_number }} of  {{ Constants.num_rounds }}
+
+    </center>
+{% endblock %}
+
+
+  {% block styles %}
+<style type="text/css">
+table.blueTable {
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+    <div class="card">
+        <div class="card-header">
+            <b> Instructions for stage 2</b>
+        </div>
+        <div class="card-body">
+
+            In this stage you can see the contributions of the other participants in the your group.
+            You can give between 0 and 10 punishment points to all other participants.
+            Each punishment point you distribute to another participant reduces your payoff by 1 point and reduces the other participant's payoff by 2 points.
+            </div>
+        <div class="card">
+            <center>    <td>You are the <strong>{{ player.role }}</strong> of this project.</td></center>
+        </div>
+    </div> <br>
+
+<table class="table table-hover table-striped table-responsive mx-auto ">
+        <tr>
+            <th style="width: 200px">Group's total contribution: </th>
+            <th style="width: 200px">Project's Result: </th>
+            <th style="width: 200px">Your Project's gains: </th>
+            <th style="width: 200px">Points kept: </th>
+            <th style="width: 200px"> Stage 1 earnings: </th>
+
+        </tr>
+        <tr>
+            <td>{{ group.total_contribution }} points</td>
+            <td>{{ total_earnings }} points</td>
+
+            <td>{{ group.individual_share }} points</td>
+            <td>  {{ endkept }}  points</td>
+            <td> {{ s1 }} points </td>
+        </tr>
+    </table>
+<center>
+<table class="table table-hover table-striped table-responsive mx-auto ">
+        <tr>
+            <th style="width: 200px">Your role: </th>
+            <th >Your contribution:</th>
+        </tr>
+        <tr>
+            <td>{{ player.role }}</td>
+            <td>{{ player.contribution }} points </td>
+        </tr>
+    </table>
+
+ <table class="table table-hover table-striped table-responsive mx-auto ">
+
+        <tr>
+            <th style="width: 200px">Participant:</th>
+            <th style="width: 200px">Contribution:</th>
+            <th style="width: 200px">Punishment:</th>
+            <th>Effect on their payoff:</th>
+        </tr>
+   {{ for i,j in data }}
+
+       <tr>
+            <td valign="middle ">{{i.role}}</td>
+            <td valign="middle ">{{i.contribution }} points</td>
+            <td valign="middle" style="width: 100px"> <input type="number" name="{{j}}" id="{{j}}" class="{{j}}" oninput="{{j}}change()" min="0" max="10" maxlength = "2"  ></td>
+               <td valign="middle"><span class="1{{j}}"></span></td>
+
+       </tr>
+      {{ endfor }}
+</tbody>
+
+</table>
+
+
+
+    </center>
+{{ formfield_errors 'pun1' }}
+{{ formfield_errors 'pun2' }}
+{{ formfield_errors 'pun3' }}
+
+
+   <center> <button class="otree-btn-next btn btn-primary" onclick="javascript:check(value)"> Next </button> </center>
+
+<br>
+
+
+
+</div>
+        <button type="button" onclick="show()" >
+    Instructions
+</button>
+    <div id="inst" style="display: none">
+    {{ include Constants.instructions_template }}
+    </div>
+
+
+{{ endblock }}
+
+{% block scripts %}
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+var1= document.getElementById('pun1')
+var2= document.getElementById('pun2')
+var3= document.getElementById('pun3')
+
+function check (value) {
+    if (document.getElementById('pun1') == null) {} else {if (document.getElementById('pun1').value == ""){document.getElementById('pun1').value=0}};
+    if (document.getElementById('pun2') == null) {} else {if (document.getElementById('pun2').value == ""){document.getElementById('pun2').value=0}};
+    if (document.getElementById('pun3') == null) {} else {if (document.getElementById('pun3').value == ""){document.getElementById('pun3').value=0}};;
+    }
+
+
+function pun1change() {
+    $('.1pun1').text(- document.getElementById('pun1').value*{{Constants.punmulti}});
+}
+function pun2change() {
+    $('.1pun2').text(- document.getElementById('pun2').value*{{Constants.punmulti}});
+}
+function pun3change() {
+    $('.1pun3').text(- document.getElementById('pun3').value*{{Constants.punmulti}});
+}
+
+</script>
+
+        <script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+{{ endblock }}

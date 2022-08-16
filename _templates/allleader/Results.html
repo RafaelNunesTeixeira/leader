@@ -1,0 +1,118 @@
+
+
+        <!-- Full-Screen & Focus -->
+    <script src="{% static 'global/FriendlyChecks.js' %}"></script>
+    <link href="{% static 'global/FriendlyChecks.css' %}" rel="stylesheet">
+
+{{ block title }}   Results  (Period {{ subsession.round_number }} of {{ Constants.num_rounds }}) {{ endblock }}
+
+{% load staticfiles otree_tags %}
+{% block styles %}
+
+    <style>
+        td#filka {
+            width: 20px;
+            font-weight: bold;
+            font-size: 120%;
+        }</style>
+
+{% endblock %}
+{% block content %}
+
+<div class="panel-body">
+    <table class="table table-hover table-striped table-bordered">
+
+
+    </table>
+<br>
+    <table class="table table-hover table-striped table-bordered">
+        <tr style="font-size:18px;background-color:#A9A9A9; " >  <td><strong>Stage 1: Project's contributions</strong> </td> <td></td></tr>
+        <tr>
+            <td>You <strong>({{player.role}})</strong> contributed:</td>
+            <td style="width: 200px" align="center"><strong>{{ player.contribution }}</strong></td>
+
+        </tr>
+        {{ for p in player.get_others_in_group }}
+	    <tr>
+            <td><strong>{{p.role}}</strong> contributed:</td>
+            <td style="width: 200px" align="center">{{ p.contribution }}</td>
+
+        <tr>
+	    {{ endfor }}
+        <tr style="background-color:#BEBEBA;">
+	    <td><strong>Project's individual earning:</strong></td>
+        <td style="width: 200px" align="center"><strong>{{ group.individual_share }}</strong></td>
+        </tr>
+        <td><strong>Endowment Kept:</strong></td>
+
+        <td style="width: 200px" align="center"><strong>{{ endkept }} </strong></td>
+
+        <tr style="background-color:#A9A9A9;">
+
+            <td><strong>Stage 1's earnings:</strong></td>
+            <td style="width: 200px" align="center"><strong>{{ s1 }}</strong></td>
+        </tr>
+    </table>
+
+
+
+       <table class="table table-hover table-striped table-bordered">
+            <tr style="font-size:18px;background-color:#A9A9A9; " >  <td><strong> Stage 2: Punishment after contributions</strong> </td> <td></td></tr>
+	   {{ for i,j in data }}
+        <tr>
+            <td>Punishment you (<strong>{{player.role}}</strong>) gave to the <strong>{{i.role}}</strong>:</td>
+            <td style="width: 200px" align="center">{{j}}</td>
+        </tr>
+        {{ endfor }}
+
+           <tr style="background-color:#BEBEBA;">
+	    <td ><strong>Total punishment gave:</strong></td>
+        <td align="center"><strong>{{ pung }}</strong></td>
+        </tr>
+          {{ for i,j in data2 }}
+        <tr>
+            <td> Punishment received by the <strong>{{i.role}}</strong>:</td>
+            <td style="width: 200px" align="center">{{j}} </td>
+           {{ endfor }}
+        </tr>
+            <tr style="background-color:#BEBEBA;">
+	    <td><strong>Total punishment received:</strong></td>
+        <td style="width: 200px" align="center"><strong>{{ punr }}</strong></td>
+        </tr>
+              </tr>
+            <tr style="background-color:#A9A9A9;">
+	    <td><strong>Amount deduced in Stage 2:</strong></td>
+        <td style="width: 200px" align="center"><strong>{{ punishment }}</strong></td>
+        </tr>
+    </table>
+
+     <table class="table table-hover table-striped table-bordered">
+         <tr style="font-size:18px;background-color:#A9A9A9; width: 200px" >  <td><strong>Total in this round</strong> </td> <td><strong><center>{{player.s2}}</center></strong> </td></tr>
+
+     </table>
+        <center> {{ next_button }} </center>
+
+
+</div>
+        <button type="button" onclick="show()" >
+    Instructions
+</button>
+    <div id="inst" style="display: none">
+    {{ include Constants.instructions_template }}
+    </div>
+
+
+{{ endblock }}
+
+
+
+        <script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

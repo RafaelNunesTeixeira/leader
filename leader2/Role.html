@@ -1,0 +1,39 @@
+
+
+
+{{ block title }}{{ endblock }}
+{{ block style }}
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #0000FF;
+  flex-direction      : column;
+  text-align          : center;
+  justify-content     : center;
+  padding: 10px;
+  font-size           : 2em;
+  font-weight:        : bold;
+}
+</style>
+{{ endblock }}
+{{ block content }}
+<div class="center">
+    <center>You have been selected as:</center>
+        <br>
+
+        <center> <strong>{{role}}</strong> </center>
+        <br>
+        <center>in your group.</center>
+    <br>
+    <center> Click next to start the joint project with the other participants.</center>
+
+<br> <br>
+
+    <center>     {{ next_button }} </center>
+
+</div>
+
+
+
+{{ endblock }}

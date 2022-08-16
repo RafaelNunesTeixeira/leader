@@ -1,0 +1,223 @@
+{% block styles %}
+<style type="text/css">
+.slidecontainer {
+  width: 100%;
+}
+
+span {
+  display: inline-block;
+  width: 15%;
+  text-align: left;
+
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 85%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+   position:relative;
+  margin-left:70px;
+  margin-right:50px;
+
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #000000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+datalist {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  width: 85%;
+  margin-left:70px;
+  margin-right:50px;
+
+
+}
+</style>
+{% endblock %}
+
+{{ block title }}
+Survey - Part 7 of 7
+{{ endblock }}
+
+
+{{ block content }}
+
+
+<p>In this task you have been randomly paired with another person, whom we will refer to as the other. This other person is someone you
+do not know and will remain mutually anonymous. All of your choices are completely confidential. You will be making a series of
+decisions about allocating hypothetical resources between you and this other person. For each of the following questions, please indicate the
+distribution you prefer most by marking the respective position along the slider. You can only make one mark for each question.
+</p>
+
+
+        <div>
+            <center><strong>Question 1</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C11}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q1" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C21}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+        <div>
+            <center><strong>Question 2</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C12}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q2" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C22}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+
+        <div>
+            <center><strong>Question 3</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C13}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q3" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C23}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+
+        <div>
+            <center><strong>Question 4</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C14}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q4" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C24}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+
+        <div>
+            <center><strong>Question 5</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C15}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q5" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C25}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+
+        <div>
+            <center><strong>Question 6</strong></center>
+            <span>You receive:</span>
+            <datalist>
+                    {{for p in C16}}
+                <option value={{p}} label={{p}}></option>
+                    {{endfor}}
+            </datalist>
+            <input type="range"  name="q6" min="1" max="9" step="1" class="slider">
+            <datalist>
+                     {{for p in C26}}
+            <option value={{p}} label={{p}}></option>
+                        {{endfor}}
+             </datalist>
+            <span>Other receives:</span>
+            <br><br>
+        </div>
+
+
+
+
+
+
+<center>
+    {{ next_button }}
+</center>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock  }}
+

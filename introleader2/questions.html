@@ -1,0 +1,93 @@
+
+        {{ block title }}Questions{{ endblock }}
+
+{{ block content }}
+        <div class="card bg-light m-3">
+        <div class="card-body">
+    <p>
+        Please, consider the following hypothetical situation to check your understanding of the instructions
+    </p>
+            <p>
+        If necessary, you can check the instruction at the bottom of the page.
+    </p>
+    <p>
+        <strong>Example:</strong> A group made a total contribution of 40 points to the project. Mr. Example contributed 12 points.
+    </p>
+
+
+        </div>
+        </div>
+
+        <p><strong>Question 1:</strong> What was the result of the project in this round?</p>
+        <p><strong>Remember:</strong> Result of the Project = 1.5 &times(total contribution to the project) </p>
+        {{ formfield 'q1' label=""}}
+
+        <br>
+        <p><strong>Question 2:</strong> What was the individual earnings of each participant due to the project?</p>
+        <p><strong>Remember:</strong> Individual Earning = <sup>1.5 &times(total contribution to the project)</sup>&frasl;<sub>(Group Members)</sub> </p>
+        {{ formfield 'q2' label=""}}
+
+        <br>
+        <p><strong>Question 3:</strong> How many points does Mr Example earn in this round?</p>
+         <p><strong>Remember:</strong> Total Earnings =(20 – Participant's contribution to the project)+  <sup>1.5 &times(total contribution to the project)</sup>&frasl;<sub>(Group Members)</sub> </p>
+
+        {{ formfield 'q3' label=""}}
+
+        <br>
+        <p><strong>Question 4:</strong> How many Pounds is 100 points worth?</p>
+
+        {{ formfield 'q4' label=""}}
+
+        <br>
+        <p><strong>Question 5:</strong> Please select the number eighty-eight in the list below?</p>
+
+        {{ formfield 'q5' label=""}}
+
+        <br>
+        <p><strong>Question 6:</strong> Are you interacting with real people?</p>
+
+        {{ formfield 'q6' label=""}}
+<br>
+        <p><strong>Question 7:</strong> How many rounds are you going to play?</p>
+
+        {{ formfield 'q7' label=""}}
+
+
+   <center> {{ next_button }} </center>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+      {{ include Constants.instructions_template }}
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock  }}
+
+
+

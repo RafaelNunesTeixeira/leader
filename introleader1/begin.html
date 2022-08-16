@@ -1,0 +1,63 @@
+
+{{ block title }}
+<center> <img src="{{ static 'global/uva-logo.png' }}"/> </center>
+{{ endblock }}
+{{ block content }}
+
+
+<div class="card bg-light m-3">
+<div class="card-body">
+
+
+    <p> Welcome to the experiment.</p>
+
+    <p>
+        This was developed by the staff -Professor Onderstal, Professor Stoelhorst, Mr. Teixeira- of the University of Amsterdam.
+        All ethical protocols are strictly followed, and no personal data will be disclosed.
+    </p>
+
+
+<p>
+
+            {{ include Constants.contact }}
+</p>
+
+</div>
+</div>
+
+<div class="card bg-light m-3">
+<div class="card-body">
+    <p> This experiment lasts for about 25 minutes (considering up to 5 minutes of waiting for a group).
+    </p>
+    <p>
+       Your decisions will affect how much money you can earn. In addition to the {{Constants.pfee}} pounds you earn from participating in this experiment, you can earn up to
+        6 pounds according to your decisions. More details will follow during the experiment.</p>
+
+    <p id="type">
+        You will be interacting with multiple participants at the same time.
+        It is essential to the others participants that you make all your decisions.
+        Therefore, you need to finish the experiment in one go.
+    </p>
+    <p>If you take too long to make one decision, we will remove you from the session, and you will not receive any payment.</p>
+    <p>
+        Pay attention. During the experiment, there will be some attentions check questions.  Payments are contingent on not failing the attention checks.
+    </p>
+    <p>
+       Please, only participate in the experiment if you can finish all the tasks now (about 25 minutes).
+    </p>
+
+</div>
+</div>
+</div>
+<div class="card bg-light m-3">
+<div class="card-body">
+    <center>
+    <input id="yesCheck" type="radio" name="confirm" value="True" class="btn btn-primary btn-large"><font size="+0"> I agree with those terms.  </font> </input>
+<br>
+        <br>
+    <input id="noCheck" type="radio" name="confirm" value="False" class="btn btn-primary btn-large"><font size="+0"> I disagree or cannot participate in the moment.</font> </input>
+    </center>
+</div>
+    <center> {{ next_button }} </center>
+
+{{ endblock }}

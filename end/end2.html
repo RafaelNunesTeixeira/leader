@@ -1,0 +1,73 @@
+{{ block title }}
+
+<center> <img src="{{ static 'global/uva-logo.png' }}"/> </center>
+
+{{ endblock }}
+
+{{ block content }}
+
+
+<div class="card bg-light m-3">
+<div class="card-body">
+
+    <p>
+        This experiment was developed by the staff -Professor Onderstal, Professor Stoelhorst, Mr. Teixeira (Ph.D. candidate)- of the University of Amsterdam.
+        All ethical protocols are strictly followed, and no personal data will be disclosed.
+    </p>
+
+
+<p>
+
+</p>
+</div>
+</div>
+<div class="card bg-light m-3">
+<div class="card-body">
+
+    <p>
+        This is the end of the experiment. Please fill the information below:
+    <br>
+    {{ formfield 'gender' }}
+    {{ formfield 'age' }}
+            {{ formfield 'exp' }}
+            {{ formfield 'strategy' }}
+    <br>
+</div>
+</div>
+
+<center>
+    {{ next_button }}
+</center>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock  }}

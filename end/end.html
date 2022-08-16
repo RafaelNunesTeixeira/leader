@@ -1,0 +1,69 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+  This is the end!
+{% endblock %}
+
+{% block content %}
+
+    <div class="card bg-light m-3">
+    <div class="card-body">
+
+
+
+        <p>Thanks for your participation.</p>
+        <br>
+        <p> In addition to the participation fee (2.10 Pounds) , you earned {{pay}} Pounds in this experiment due to your choices and you will be paid soon.</p>        <br>
+
+    </div>
+    </div>
+
+
+    <div class="card bg-light m-3">
+    <div class="card-body">
+
+
+
+<h2 style="text-align: center;"><a href="https://app.prolific.co/submissions/complete?cc=1527536E"  target="_blank">Click here to finish the experiment</a> </h2>
+<br>
+
+    </p>
+
+
+
+</div>
+</div>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+{{ endblock }}

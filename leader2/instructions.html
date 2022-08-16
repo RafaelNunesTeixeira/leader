@@ -1,0 +1,49 @@
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <p><strong>Earnings: </strong>In the experiment, you can earn points. The points you earn will be converted in Pounds at the rate</p>
+        <p><center><strong>100 points = 2.00 Pounds.</strong></center></p>
+        <p>Your extra earnings will be added in your account a couple of days after the end of the experiment.</p>
+    </div>
+ </div>
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+    <h3>
+        Instructions
+    </h3>
+
+    <p>
+        In this study, you will be in a randomly formed group of {{ Constants.players_per_group }} participants.
+        You are going to play with the same group for {{Constants.rounds}} rounds.
+        The group is composed of <strong>{{player.participant.gal}}</strong>. You assume the role of <strong> {{player.participant.rol}} </strong> in your group.
+
+    </p>
+        <p></p>
+    <p>
+        Each participant in the group starts each round with 20 points.
+        The group has the opportunity to undertake a joint project.
+    </p>
+        <p>
+        In the joint project, each participant in the group decides how many points to contribute into it.
+            A contribution could be any whole number from 0 to 20.
+            Each 1 point contributed to the project is multiplied by {{ Constants.multiplier }}.
+            The result of the project is the sum of contribution given by all group members multiplied by the {{ Constants.multiplier }}.
+            Then the result of the project is <strong>evenly split among all</strong> {{ Constants.players_per_group }} participants:
+            {{player.participant.gal}}. The points not contributed to the project are also kept by the participants and count to the final earnings.
+
+        </p>
+
+            <p>Thus, your total earnings from project in each round is determined by: </p>
+            <center>Total earnings = (20 – your contribution to the project) +  <sup>1.5 &times(total contribution to the project)</sup>&frasl;<sub>3</sub>
+</center>
+            <br>
+
+
+<br><p> Your earnings in the experiment is the sum of your points in all rounds. The earnings of all other participants are calculated in the same way.</p>
+
+        </ul>
+    </p>
+    </p>
+    </div>
+</div>
+

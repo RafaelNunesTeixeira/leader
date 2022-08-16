@@ -1,0 +1,231 @@
+{{ block style }}
+<style>
+.no-copy p {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ }
+
+#mycanvas {
+	display: block;
+	border: 5px solid yellow;
+	margin: 50px auto;
+	display: inline-block;
+
+}
+
+#mycanvas2 {
+	display: block;
+	border: 5px solid blue;
+	margin: 50px auto;
+	display: inline-block;
+
+}
+</style>
+{{ endblock }}
+{{ block title }}
+Survey - Part 2 of 7
+{{ endblock }}
+
+{{ block content }}
+
+
+<p>
+    You will decide how to allocate 50 balls between two boxes.
+</p>
+<p>
+Your task is to put each of the balls, one-by-one, into one of the two boxes: the blue box or
+the yellow box. To add a ball in the box, left click in the chosen box. To remove a ball from the box, right click in the chosen box.
+</p>
+<p>
+    For each ball you put in the blue
+box, you will receive 0.5 point, and for each ball you put in the yellow box, you will receive
+1 point. These points count for your final earnings.
+</p>
+
+
+<input type="hidden" name="rul" id="rul" value="0">
+<input type="hidden" name="che" id="che" value="0">
+
+
+
+<p>
+  <center>  <strong>The rule is to put the balls in the blue box.</strong> </center>
+</p>
+
+<div>
+    <center>
+<canvas onclick="addBall()" id="mycanvas2" oncontextmenu="removeball()"></canvas>
+        <span class="no-copy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<canvas onclick="addBall()" id="mycanvas" oncontextmenu="removeball()"></canvas>
+        </center>
+
+</div>
+<center> Balls left: <strong><span id="left"> 50 </span> </strong> </div></center>
+<br>
+<center>You earned <strong><span id="tot"> 0 </span> </strong> points.</center>
+<p style="visibility: hidden"> You broke the rule <strong><span id="rule"> 0 </span> </strong> times </center></p>
+
+<center>
+    {{ next_button }}
+</center>
+
+
+        <button type="button" onclick="show2()">
+    Contact
+</button>
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+
+{{ endblock }}
+
+
+<script>
+
+
+
+
+var mycanvas =document.getElementById("mycanvas");
+var mycanvas2 =document.getElementById("mycanvas2");
+
+
+
+//canvas styles
+
+var w=215,h=240;
+
+mycanvas.height=h;
+mycanvas.width=w;
+mycanvas2.height=h;
+mycanvas2.width=w;
+total = 50
+rule = 0
+
+
+//balls array
+var ball=[];
+//Class for ball
+function Ball(x,y,r,c){
+  var ctx = event.target.getContext("2d")
+  this.x=x; //starting x coordinate
+  this.y=y; //starting x coordinate
+  this.r=r; //radius
+  this.c=c; //color
+  this.update=function(){
+        ctx.beginPath()
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, false);
+		ctx.fillStyle = this.c;
+		ctx.fill();
+}
+}
+
+var count=0;//counting balls
+var test =0;//control
+var z = 15;// initial coordinate
+var w = 15;// initial coordinate
+var a = 15;// initial coordinate
+var b = 15;// initial coordinate
+
+//adding balls
+function addBall(){
+  if(test<50){
+       if(event.target.id =="mycanvas"){
+              x=a;
+              y=z;
+              ball[count]= new Ball(x,y,10,"black");
+              count++;
+              test++;
+              rule++;
+              x=x+30;
+              a=x
+              if( x> 200){a=15; z=z+30}}
+        if(event.target.id =="mycanvas2"){
+              x=b;
+              y=w;
+              ball[count]= new Ball(x,y,10,"black");
+              count++;
+              test++;
+              x=x+30;
+              b=x;
+              if( x> 200){b=15; w=w+30}}
+}
+}
+
+//updating canvas
+function update(){
+  var i;
+  for(i=0;i<count;i++){
+  ball[i].update();
+  document.getElementById("left").innerHTML = total-test;
+  document.getElementById("rule").innerHTML = rule;
+  document.getElementById("tot").innerHTML = rule*1 + 0.5*(test-rule);
+  document.getElementById("rul").value= rule;
+  document.getElementById("che").value= test
+
+}
+}
+
+
+
+setInterval(update, 1000/60);
+
+//removeball
+
+function removeball(){
+if(test<51){
+       if(event.target.id =="mycanvas"){
+             if(a==15 && z>15){
+              z=z-30;
+              a=225};
+              x=a-30;
+              y=z;
+              ball[count]= new Ball(x,y,12,"white");
+              count++;
+              a=x;
+              if( x> 200){a=15; z=z+30};
+              if(x>14){test--};
+              if(x>14){rule--};
+              if( x<16) {a=15};;
+              }
+        if(event.target.id =="mycanvas2"){
+              if(b==15 && w>15){
+                w=w-30;
+                b=225};
+              x=b-30;
+              y=w;
+              ball[count]= new Ball(x,y,12,"white");
+              count++;
+              b=x;
+              if( x> 200){b=15; w=w+30};
+              if(x>14){test--};
+              if( x<16) {b=15}
+             ;
+
+
+              }
+};
+    event.preventDefault();
+
+     ;
+    }
+
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
